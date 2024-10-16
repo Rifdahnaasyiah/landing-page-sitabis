@@ -1,0 +1,36 @@
+<?php
+// Koneksi ke database
+$servername = "localhost";
+$username = "root";  // Sesuaikan dengan username MySQL Anda
+$password = "";  // Sesuaikan dengan password MySQL Anda
+$dbname = "db_sitabis";  // Nama database
+
+// Membuat koneksi
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Memeriksa koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
+// Mengambil data dari form
+$desa = $_POST['desa'];
+$alamat = $_POST['alamat'];
+$nama = $_POST['nama'];
+$anggota = $_POST['jml_keluarga'];
+$usia = $_POST['usia'];
+
+// Menyimpan data ke database
+$sql = "INSERT INTO data_masyarakat_ (desa, alamat, nama, jml_keluarga, usia) 
+        VALUES ('$desa', '$alamat', '$nama', '$anggota', '$usia')";
+
+if ($conn->query($sql) === TRUE) {
+    // Redirect ke halaman lain setelah berhasil
+    header('Location: questions.php');
+    exit();
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Menutup koneksi
+$conn->close();
