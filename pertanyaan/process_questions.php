@@ -13,6 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Mengambil data dari form kuesioner
+$id_masyarakat = $_POST['id_masyarakat'];
 $jwb1 = $_POST['jwb1'];
 $jwb2 = $_POST['jwb2'];
 $jwb3 = $_POST['jwb3'];
@@ -31,11 +32,9 @@ $jwb15 = $_POST['jwb15'];
 $jwb16 = $_POST['jwb16'];
 $jwb17 = $_POST['jwb17'];
 
-// Lanjutkan dengan mengambil data pertanyaan lainnya
-
-// Simpan data ke tabel
-$sql = "INSERT INTO phbs_answers (jwb1, jwb2, jwb3, jwb4, jwb5, jwb6, jwb7, jwb8, jwb9, jwb10, jwb11, jwb12, jwb13, jwb14, jwb15, jwb16, jwb17)
-        VALUES ('$jwb1', '$jwb2', '$jwb3', '$jwb4', '$jwb5', '$jwb6', '$jwb7', '$jwb8', '$jwb9', '$jwb10', '$jwb11', '$jwb12', '$jwb13', '$jwb14', '$jwb15', '$jwb16', '$jwb17')";  // Sesuaikan dengan jumlah pertanyaan
+// Simpan data ke tabel, termasuk id_masyarakat
+$sql = "INSERT INTO phbs_answer2 (id_masyarakat, jwb1, jwb2, jwb3, jwb4, jwb5, jwb6, jwb7, jwb8, jwb9, jwb10, jwb11, jwb12, jwb13, jwb14, jwb15, jwb16, jwb17)
+        VALUES ('$id_masyarakat', '$jwb1', '$jwb2', '$jwb3', '$jwb4', '$jwb5', '$jwb6', '$jwb7', '$jwb8', '$jwb9', '$jwb10', '$jwb11', '$jwb12', '$jwb13', '$jwb14', '$jwb15', '$jwb16', '$jwb17')";
 
 if ($conn->query($sql) === TRUE) {
     header('Location: hasil.html');

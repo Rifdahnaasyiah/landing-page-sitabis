@@ -14,19 +14,21 @@ if ($conn->connect_error) {
 }
 
 // Mengambil data dari form
+$id_masyarakat = $_POST['id_masyarakat'];
 $desa = $_POST['desa'];
 $alamat = $_POST['alamat'];
 $nama = $_POST['nama'];
-$anggota = $_POST['jml_keluarga'];
+$jml_keluarga = $_POST['jml_keluarga'];
 $usia = $_POST['usia'];
 
 // Menyimpan data ke database
 $sql = "INSERT INTO data_masyarakat_ (desa, alamat, nama, jml_keluarga, usia) 
-        VALUES ('$desa', '$alamat', '$nama', '$anggota', '$usia')";
+        VALUES ('$desa', '$alamat', '$nama', '$jml_keluarga', '$usia')";
 
 if ($conn->query($sql) === TRUE) {
+    $id_masyarakat = $conn->insert_id;
     // Redirect ke halaman lain setelah berhasil
-    header('Location: questions.php');
+    header('Location: questions.php?id_masyarakat=' . $id_masyarakat);
     exit();
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
